@@ -5,10 +5,23 @@ use App\Http\Controllers\Auth\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('landingpage.index');
+    return view('contents.home');
 });
 Route::get('/landing', function () {
     return view('index');
+});
+Route::get('/admin', function () {
+    return view('admin.layouts');
+});
+
+Route::get('/about', function () {
+    return view('contents.about');
+});
+Route::get('/kegiatan', function () {
+    return view('contents.kegiatan');
+});
+Route::get('/persembahan', function () {
+    return view('contents.persembahan');
 });
 
 // Route::get('/', [UserController::class, 'formLogin'])->name('login');
