@@ -86,7 +86,7 @@ License: For each use you must have a valid license purchased only from above li
                     <div class="w-lg-500px p-10 p-lg-15 mx-auto">
                         <!--begin::Form-->
                         <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form"
-                            data-kt-redirect-url="../../demo1/dist/index.html" action="#">
+                            data-kt-redirect-url="/admin/member" action="#">
                             <!--begin::Heading-->
                             <div class="text-center mb-10">
                                 <!--begin::Title-->

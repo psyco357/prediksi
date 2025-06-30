@@ -10,10 +10,6 @@ Route::get('/', function () {
 Route::get('/landing', function () {
     return view('index');
 });
-Route::get('/admin', function () {
-    return view('admin.layouts');
-});
-
 Route::get('/about', function () {
     return view('contents.about');
 });
@@ -22,6 +18,18 @@ Route::get('/kegiatan', function () {
 });
 Route::get('/persembahan', function () {
     return view('contents.persembahan');
+});
+
+//auth
+Route::get('/login', function () {
+    return view('contents.login');
+});
+//admin
+Route::get('/admin/admin', function () {
+    return view('admin.contents.member');
+});
+Route::get('/admin/member', function () {
+    return view('admin.contents.member');
 });
 
 // Route::get('/', [UserController::class, 'formLogin'])->name('login');

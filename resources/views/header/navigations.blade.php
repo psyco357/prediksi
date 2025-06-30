@@ -100,8 +100,7 @@
                     <!--end::Menu wrapper-->
                     <!--begin::Toolbar-->
                     <div class="flex-equal text-end ms-1">
-                        <a href="../../demo1/dist/authentication/flows/basic/sign-in.html"
-                            class="btn btn-success">Admin</a>
+                        <a href="/login" class="btn btn-success">Admin</a>
                     </div>
                     <!--end::Toolbar-->
                 </div>
