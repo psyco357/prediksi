@@ -6,12 +6,12 @@
         <!--begin::Heading-->
         <div class="text-center mb-17">
             <!--begin::Title-->
-            <h3 class="fs-2hx text-dark mb-5" id="how-it-works" data-kt-scroll-offset="{default: 100, lg: 150}">
-                How it Works</h3>
+            <h3 class="fs-2hx text-dark mb-5" id="how-it-works" data-kt-scroll-offset="{default: 100, lg: 150}"
+                style="background: linear-gradient(to right, #12CE5D 0%, #FFD80C 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
+                Persembahan</h3>
             <!--end::Title-->
             <!--begin::Text-->
-            <div class="fs-5 text-muted fw-bold">Save thousands to millions of bucks by using single tool
-                <br />for different amazing and great useful admin
+            <div class="fs-5 text-muted fw-bold">Langakah untuk Melakukan Persembahan
             </div>
             <!--end::Text-->
         </div>
@@ -103,61 +103,128 @@
         <!--end::Row-->
         <!--begin::Product slider-->
         <div class="tns tns-default">
-            <!--begin::Slider-->
-            <div data-tns="true" data-tns-loop="true" data-tns-swipe-angle="false" data-tns-speed="2000"
-                data-tns-autoplay="true" data-tns-autoplay-timeout="18000" data-tns-controls="true" data-tns-nav="false"
-                data-tns-items="1" data-tns-center="false" data-tns-dots="false"
-                data-tns-prev-button="#kt_team_slider_prev1" data-tns-next-button="#kt_team_slider_next1">
-                <!--begin::Item-->
-                <div class="text-center px-5 pt-5 pt-lg-10 px-lg-10">
-                    <img src="assets/media/product-demos/demo1.png" class="card-rounded shadow mw-100" alt="" />
+            <!--begin::Form-->
+            <form class="form" action="{{ route('member.store') }}" id="kt_modal_add_customer_form">
+                <!--begin::Modal header-->
+                <div class="text-center mb-10 mb-md-0">
+                    <!--begin::Modal title-->
+                    <h1 class="fw-bolder"
+                        style="background: linear-gradient(to right, #12CE5D 0%, #FFD80C 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
+                        Persembahan</h1>
+                    <!--end::Modal title-->
                 </div>
-                <!--end::Item-->
-                <!--begin::Item-->
-                <div class="text-center px-5 pt-5 pt-lg-10 px-lg-10">
-                    <img src="assets/media/product-demos/demo2.png" class="card-rounded shadow mw-100" alt="" />
+                <!--end::Modal header-->
+                <!--begin::Modal body-->
+                <div class="modal-body py-10 px-lg-17">
+                    <!--begin::Scroll-->
+                    <div class="scroll-y me-n7 pe-7" id="kt_modal_add_customer_scroll">
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-7">
+                            <!--begin::Label-->
+                            <label class="required fs-6 fw-bold mb-2" for="namalengkap">Nama Lengkap </label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input type="text" class="form-control form-control-solid" placeholder="Nama lengkap"
+                                name="namalengkap" id="namalengkap" />
+                            <!--end::Input-->
+                        </div>
+                        <div class="fv-row mb-7">
+                            <!--begin::Label-->
+                            <label class="required fs-6 fw-bold mb-2" for="namabaptis">Nama Baptis</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input type="text" class="form-control form-control-solid" placeholder="Nama Baptis"
+                                name="namabaptis" id="namabaptis" />
+                            <!--end::Input-->
+                        </div>
+
+                        <div class="fv-row mb-7">
+                            <!--begin::Label-->
+                            <label class="required fs-6 fw-bold mb-2" for="jekel">Jenis Kelamin</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <select class="form-select form-select-solid" name="jekel" id="jekel">
+                                <option value="">-- Pilih Jenis Kelmain --</option>
+                                <option value="L">Laki-Laki</option>
+                                <option value="P">Perempuan</option>
+                            </select>
+                            <!--end::Input-->
+                        </div>
+                        <div class="fv-row mb-7">
+                            <!--begin::Label-->
+                            <label class="required fs-6 fw-bold mb-2" for="tempatlahir">Tempat Lahir</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input type="text" class="form-control form-control-solid" placeholder="Tempat Lahir"
+                                name="tempatlahir" id="tempatlahir" />
+                            <!--end::Input-->
+                        </div>
+                        <div class="fv-row mb-7">
+                            <!--begin::Label-->
+                            <label class="required fs-6 fw-bold mb-2" for="tgllahir">Tanggal Lahir</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input type="text" class="form-control form-control-solid tanggal"
+                                placeholder="Tanggal Lahir" name="tgllahir" id="tgllahir" />
+                            <!--end::Input-->
+                        </div>
+                        <div class="fv-row mb-7">
+                            <!--begin::Label-->
+                            <label class="required fs-6 fw-bold mb-2" for="notelp">Nomor Hp</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input type="text" class="form-control form-control-solid" placeholder="Nomor Hp"
+                                name="notelp" id="notelp" />
+                            <!--end::Input-->
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-7">
+                            <!--begin::Label-->
+                            <label class="fs-6 fw-bold mb-2" for="email">
+                                <span class="required">Email</span>
+                                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"
+                                    title="Email address must be active"></i>
+                            </label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input type="email" class="form-control form-control-solid" placeholder="example@gami.com"
+                                name="email" id="email" />
+                            <!--end::Input-->
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-15">
+                            <!--begin::Label-->
+                            <label class="fs-6 fw-bold mb-2" for="alamat">Alamat</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input type="text" class="form-control form-control-solid"
+                                placeholder="Jl. Soekarno Blok C no.78 rt2/3" name="alamat" id="alamat" />
+                            <!--end::Input-->
+                        </div>
+                        <!--end::Input group-->
+
+                    </div>
+                    <!--end::Scroll-->
                 </div>
-                <!--end::Item-->
-                <!--begin::Item-->
-                <div class="text-center px-5 pt-5 pt-lg-10 px-lg-10">
-                    <img src="assets/media/product-demos/demo4.png" class="card-rounded shadow mw-100" alt="" />
+                <!--end::Modal body-->
+                <!--begin::Modal footer-->
+                <div class="modal-footer flex-center">
+                    <!--begin::Button-->
+                    <button type="reset" id="kt_modal_add_customer_cancel" class="btn btn-light me-3">Reset</button>
+                    <!--end::Button-->
+                    <!--begin::Button-->
+                    <button type="submit" id="kt_modal_add_customer_submit" class="btn btn-primary">
+                        <span class="indicator-label">Kirim</span>
+                        <span class="indicator-progress">Please wait...
+                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                    </button>
+                    <!--end::Button-->
                 </div>
-                <!--end::Item-->
-                <!--begin::Item-->
-                <div class="text-center px-5 pt-5 pt-lg-10 px-lg-10">
-                    <img src="assets/media/product-demos/demo5.png" class="card-rounded shadow mw-100" alt="" />
-                </div>
-                <!--end::Item-->
-            </div>
-            <!--end::Slider-->
-            <!--begin::Slider button-->
-            <button class="btn btn-icon btn-active-color-primary" id="kt_team_slider_prev1">
-                <!--begin::Svg Icon | path: icons/duotune/arrows/arr074.svg-->
-                <span class="svg-icon svg-icon-3x">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none">
-                        <path
-                            d="M11.2657 11.4343L15.45 7.25C15.8642 6.83579 15.8642 6.16421 15.45 5.75C15.0358 5.33579 14.3642 5.33579 13.95 5.75L8.40712 11.2929C8.01659 11.6834 8.01659 12.3166 8.40712 12.7071L13.95 18.25C14.3642 18.6642 15.0358 18.6642 15.45 18.25C15.8642 17.8358 15.8642 17.1642 15.45 16.75L11.2657 12.5657C10.9533 12.2533 10.9533 11.7467 11.2657 11.4343Z"
-                            fill="currentColor" />
-                    </svg>
-                </span>
-                <!--end::Svg Icon-->
-            </button>
-            <!--end::Slider button-->
-            <!--begin::Slider button-->
-            <button class="btn btn-icon btn-active-color-primary" id="kt_team_slider_next1">
-                <!--begin::Svg Icon | path: icons/duotune/arrows/arr071.svg-->
-                <span class="svg-icon svg-icon-3x">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none">
-                        <path
-                            d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z"
-                            fill="currentColor" />
-                    </svg>
-                </span>
-                <!--end::Svg Icon-->
-            </button>
-            <!--end::Slider button-->
+                <!--end::Modal footer-->
+            </form>
+            <!--end::Form-->
         </div>
         <!--end::Product slider-->
     </div>

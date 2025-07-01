@@ -43,19 +43,25 @@ var KTModalCustomersAdd = (function () {
                                 notEmpty: { message: "Alamat  is required" },
                             },
                         },
-                        city: {
+                        jekel: {
                             validators: {
-                                notEmpty: { message: "City is required" },
+                                notEmpty: {
+                                    message: "Jenis Kelamin is required",
+                                },
                             },
                         },
-                        state: {
+                        tempatlahir: {
                             validators: {
-                                notEmpty: { message: "State is required" },
+                                notEmpty: {
+                                    message: "Tempat Lahir is required",
+                                },
                             },
                         },
-                        postcode: {
+                        notelp: {
                             validators: {
-                                notEmpty: { message: "Postcode is required" },
+                                notEmpty: {
+                                    message: "Nomer Telepon is required",
+                                },
                             },
                         },
                     },
@@ -84,31 +90,76 @@ var KTModalCustomersAdd = (function () {
                                               "data-kt-indicator",
                                               "on"
                                           ),
-                                          (t.disabled = !0),
-                                          setTimeout(function () {
-                                              t.removeAttribute(
-                                                  "data-kt-indicator"
-                                              ),
+                                          (t.disabled = true),
+                                          $.ajaxSetup({
+                                              headers: {
+                                                  "X-CSRF-TOKEN": document
+                                                      .querySelector(
+                                                          'meta[name="csrf-token"]'
+                                                      )
+                                                      .getAttribute("content"),
+                                              },
+                                          }),
+                                          $.ajax({
+                                              type: "POST",
+                                              url: r.getAttribute("action"), // Ambil action langsung dari form
+                                              data: $(r).serialize(),
+                                              success: function (res) {
+                                                  t.removeAttribute(
+                                                      "data-kt-indicator"
+                                                  );
+                                                  t.disabled = false;
+
                                                   Swal.fire({
-                                                      text: "Form has been successfully submitted!",
+                                                      text: "Member berhasil ditambahkan!",
                                                       icon: "success",
-                                                      buttonsStyling: !1,
+                                                      buttonsStyling: false,
                                                       confirmButtonText:
-                                                          "Ok, got it!",
+                                                          "OK, got it!",
                                                       customClass: {
                                                           confirmButton:
                                                               "btn btn-primary",
                                                       },
-                                                  }).then(function (e) {
-                                                      e.isConfirmed &&
-                                                          (i.hide(),
-                                                          (t.disabled = !1),
-                                                          (window.location =
-                                                              r.getAttribute(
-                                                                  "data-kt-redirect"
-                                                              )));
+                                                  }).then(function (result) {
+                                                      if (result.isConfirmed) {
+                                                          i.hide(); // Tutup modal
+                                                          r.reset(); // Reset form
+                                                          // Optional: reload data table or page
+                                                      }
                                                   });
-                                          }, 2e3))
+                                              },
+                                              error: function (xhr) {
+                                                  t.removeAttribute(
+                                                      "data-kt-indicator"
+                                                  );
+                                                  t.disabled = false;
+
+                                                  let errorText =
+                                                      "Terjadi kesalahan saat menyimpan.";
+
+                                                  if (
+                                                      xhr.responseJSON &&
+                                                      xhr.responseJSON.errors
+                                                  ) {
+                                                      errorText = Object.values(
+                                                          xhr.responseJSON
+                                                              .errors
+                                                      ).join("<br>");
+                                                  }
+
+                                                  Swal.fire({
+                                                      html: errorText,
+                                                      icon: "error",
+                                                      buttonsStyling: false,
+                                                      confirmButtonText:
+                                                          "OK, mengerti!",
+                                                      customClass: {
+                                                          confirmButton:
+                                                              "btn btn-primary",
+                                                      },
+                                                  });
+                                              },
+                                          }))
                                         : Swal.fire({
                                               text: "Sorry, looks like there are some errors detected, please try again.",
                                               icon: "error",

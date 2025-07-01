@@ -1,3 +1,6 @@
+@section('style')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
 <!--begin::Modal - Customers - Add-->
 <div class="modal fade" id="kt_modal_add_customer" tabindex="-1" aria-hidden="true">
     <!--begin::Modal dialog-->
@@ -5,7 +8,7 @@
         <!--begin::Modal content-->
         <div class="modal-content">
             <!--begin::Form-->
-            <form class="form" action="#" id="kt_modal_add_customer_form" data-kt-redirect="/">
+            <form class="form" action="{{ route('member.store') }}" id="kt_modal_add_customer_form">
                 <!--begin::Modal header-->
                 <div class="modal-header" id="kt_modal_add_customer_header">
                     <!--begin::Modal title-->
@@ -105,8 +108,8 @@
                             </label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input type="email" class="form-control form-control-solid" placeholder="example@gami.com"
-                                name="email" id="email" />
+                            <input type="email" class="form-control form-control-solid"
+                                placeholder="example@gami.com" name="email" id="email" />
                             <!--end::Input-->
                         </div>
                         <!--end::Input group-->

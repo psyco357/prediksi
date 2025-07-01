@@ -1,6 +1,24 @@
 @extends('admin.layouts.appadmin')
-
+@section('style')
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css" />
+    {{-- <link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" /> --}}
+@endsection
 @section('contents')
+    @if (session('success'))
+        <script>
+            window.addEventListener('DOMContentLoaded', () => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: '{{ session('success') }}',
+                    timer: 3000,
+                    showConfirmButton: false
+                });
+            });
+        </script>
+    @endif
     <!--begin::Content-->
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
         <!--begin::Toolbar-->
@@ -12,7 +30,7 @@
                     data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}"
                     class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
                     <!--begin::Title-->
-                    <h1 class="d-flex text-dark fw-bolder fs-3 align-items-center my-1">Light Skin</h1>
+                    <h1 class="d-flex text-dark fw-bolder fs-3 align-items-center my-1">Data Members</h1>
                     <!--end::Title-->
                     <!--begin::Separator-->
                     <span class="h-20px border-gray-300 border-start mx-4"></span>
@@ -21,7 +39,7 @@
                     <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
                         <!--begin::Item-->
                         <li class="breadcrumb-item text-muted">
-                            <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Home</a>
+                            <a href="/admin/member" class="text-muted text-hover-primary">Home</a>
                         </li>
                         <!--end::Item-->
                         <!--begin::Item-->
@@ -30,16 +48,9 @@
                         </li>
                         <!--end::Item-->
                         <!--begin::Item-->
-                        <li class="breadcrumb-item text-muted">Aside</li>
+                        <li class="breadcrumb-item text-muted">Data Members</li>
                         <!--end::Item-->
-                        <!--begin::Item-->
-                        <li class="breadcrumb-item">
-                            <span class="bullet bg-gray-300 w-5px h-2px"></span>
-                        </li>
-                        <!--end::Item-->
-                        <!--begin::Item-->
-                        <li class="breadcrumb-item text-dark">Light Skin</li>
-                        <!--end::Item-->
+
                     </ul>
                     <!--end::Breadcrumb-->
                 </div>
@@ -57,1684 +68,200 @@
                 <div class="card">
                     <!--begin::Card body-->
                     <div class="card-body py-4">
-                        <!--begin::Table-->
-                        <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_users">
-                            <!--begin::Table head-->
-                            <thead>
-                                <!--begin::Table row-->
-                                <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                                    <th class="w-10px pe-2">
-                                        <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                            <input class="form-check-input" type="checkbox" data-kt-check="true"
-                                                data-kt-check-target="#kt_table_users .form-check-input" value="1" />
-                                        </div>
-                                    </th>
-                                    <th class="min-w-125px">User</th>
-                                    <th class="min-w-125px">Role</th>
-                                    <th class="min-w-125px">Last login</th>
-                                    <th class="min-w-125px">Two-step</th>
-                                    <th class="min-w-125px">Joined Date</th>
-                                    <th class="text-end min-w-100px">Actions</th>
-                                </tr>
-                                <!--end::Table row-->
-                            </thead>
-                            <!--end::Table head-->
-                            <!--begin::Table body-->
-                            <tbody class="text-gray-600 fw-bold">
-                                <!--begin::Table row-->
-                                <tr>
-                                    <!--begin::Checkbox-->
-                                    <td>
-                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                            <input class="form-check-input" type="checkbox" value="1" />
-                                        </div>
-                                    </td>
-                                    <!--end::Checkbox-->
-                                    <!--begin::User=-->
-                                    <td class="d-flex align-items-center">
-                                        <!--begin:: Avatar -->
-                                        <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html">
-                                                <div class="symbol-label">
-                                                    <img src="assets/media/avatars/300-6.jpg" alt="Emma Smith"
-                                                        class="w-100" />
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <!--end::Avatar-->
-                                        <!--begin::User details-->
-                                        <div class="d-flex flex-column">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                class="text-gray-800 text-hover-primary mb-1">Emma Smith</a>
-                                            <span>smith@kpmg.com</span>
-                                        </div>
-                                        <!--begin::User details-->
-                                    </td>
-                                    <!--end::User=-->
-                                    <!--begin::Role=-->
-                                    <td>Administrator</td>
-                                    <!--end::Role=-->
-                                    <!--begin::Last login=-->
-                                    <td>
-                                        <div class="badge badge-light fw-bolder">Yesterday</div>
-                                    </td>
-                                    <!--end::Last login=-->
-                                    <!--begin::Two step=-->
-                                    <td></td>
-                                    <!--end::Two step=-->
-                                    <!--begin::Joined-->
-                                    <td>25 Jul 2022, 6:05 pm</td>
-                                    <!--begin::Joined-->
-                                    <!--begin::Action=-->
-                                    <td class="text-end">
-                                        <a href="#" class="btn btn-light btn-active-light-primary btn-sm"
-                                            data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                            <span class="svg-icon svg-icon-5 m-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none">
-                                                    <path
-                                                        d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-                                                        fill="currentColor" />
-                                                </svg>
-                                            </span>
-                                            <!--end::Svg Icon--></a>
-                                        <!--begin::Menu-->
-                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
-                                            data-kt-menu="true">
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                    class="menu-link px-3">Edit</a>
+                        <div class="table-responsive">
+                            <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_users">
+                                <thead>
+                                    <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+                                        <th class="min-w-10px">No</th>
+                                        <th class="min-w-125px">Nama Lengkap</th>
+                                        <th class="min-w-125px">Nama Baptis</th>
+                                        <th class="min-w-125px">Jenis Kelamin</th>
+                                        <th class="min-w-125px">Tempat Tanggal Lahir</th>
+                                        <th class="min-w-125px">No Hp</th>
+                                        <th class="min-w-100px">Email</th>
+                                        <th class="min-w-100px">Alamat</th>
+                                        <th class="text-end min-w-100px">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Data rows akan dimasukkan di sini -->
+                                    @foreach ($members as $index => $member)
+                                        <tr>
+                                            <td>{{ $index + 1 }}</td>
+                                            <td>{{ $member->namalengkap }}</td>
+                                            <td>{{ $member->namabaptis }}</td>
+                                            <td>{{ $member->jekel == 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
+                                            <td>{{ $member->tempatlahir }},{{ $member->tgllahir }} </td>
+                                            <td>{{ $member->notelp }}</td>
+                                            <td>{{ $member->email }}</td>
+                                            <td>{{ $member->alamat }}</td>
+                                            <td> <!-- Tombol Edit -->
+                                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                                    data-bs-target="#editModal{{ $member->id }}">
+                                                    Edit
+                                                </button>
+
+                                                <!-- Tombol Delete -->
+                                                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                                    data-bs-target="#deleteModal{{ $member->id }}">
+                                                    Delete
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Modal Edit -->
+                                        <div class="modal fade" id="editModal{{ $member->id }}" tabindex="-1"
+                                            aria-labelledby="editModalLabel{{ $member->id }}" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <form action="{{ route('member.update', $member->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="editModalLabel{{ $member->id }}">
+                                                                Edit Member</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <!-- Form fields -->
+                                                            <div class="mb-3">
+                                                                <label for="namalengkap{{ $member->id }}"
+                                                                    class="form-label">Nama Lengkap</label>
+                                                                <input type="text" name="namalengkap"
+                                                                    class="form-control"
+                                                                    id="namalengkap{{ $member->id }}"
+                                                                    value="{{ $member->namalengkap }}" required>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="namabaptis{{ $member->id }}"
+                                                                    class="form-label">Nama Baptis</label>
+                                                                <input type="text" name="namabaptis" class="form-control"
+                                                                    id="namabaptis{{ $member->id }}"
+                                                                    value="{{ $member->namabaptis }}" required>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="jekel{{ $member->id }}"
+                                                                    class="form-label">Jenis Kelamin</label>
+                                                                <select name="jekel" id="jekel{{ $member->id }}"
+                                                                    class="form-select" required>
+                                                                    <option value="L"
+                                                                        {{ $member->jekel == 'L' ? 'selected' : '' }}>
+                                                                        Laki-laki</option>
+                                                                    <option value="P"
+                                                                        {{ $member->jekel == 'P' ? 'selected' : '' }}>
+                                                                        Perempuan</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="tempatlahir{{ $member->id }}"
+                                                                    class="form-label">Tempat Lahir</label>
+                                                                <input type="text" name="tempatlahir"
+                                                                    class="form-control"
+                                                                    id="tempatlahir{{ $member->id }}"
+                                                                    value="{{ $member->tempatlahir }}" required>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="tgllahir{{ $member->id }}"
+                                                                    class="form-label">Tanggal Lahir</label>
+
+                                                                <input type="text" name="tgllahir"
+                                                                    class="form-control tanggal"
+                                                                    id="tgllahir{{ $member->id }}"
+                                                                    value="{{ $member->tgllahir }}" required>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="notelp{{ $member->id }}"
+                                                                    class="form-label">No Hp</label>
+                                                                <input type="text" name="notelp" class="form-control"
+                                                                    id="notelp{{ $member->id }}"
+                                                                    value="{{ $member->notelp }}" required>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="email{{ $member->id }}"
+                                                                    class="form-label">Email</label>
+                                                                <input type="email" name="email" class="form-control"
+                                                                    id="email{{ $member->id }}"
+                                                                    value="{{ $member->email }}" required>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="alamat{{ $member->id }}"
+                                                                    class="form-label">Alamat</label>
+                                                                <textarea name="alamat" id="alamat{{ $member->id }}" class="form-control" rows="3">{{ $member->alamat }}</textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Batal</button>
+                                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
                                             </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3"
-                                                    data-kt-users-table-filter="delete_row">Delete</a>
+                                        </div>
+
+                                        <!-- Modal Hapus -->
+                                        <div class="modal fade" id="deleteModal{{ $member->id }}" tabindex="-1"
+                                            aria-labelledby="deleteModalLabel{{ $member->id }}" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <form action="{{ route('member.destroy', $member->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title"
+                                                                id="deleteModalLabel{{ $member->id }}">
+                                                                Hapus Member</h5>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Apakah Anda yakin ingin menghapus member
+                                                            <strong>{{ $member->namalengkap }}</strong>?
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Batal</button>
+                                                            <button type="submit" class="btn btn-danger">Hapus</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
                                             </div>
-                                            <!--end::Menu item-->
                                         </div>
-                                        <!--end::Menu-->
-                                    </td>
-                                    <!--end::Action=-->
-                                </tr>
-                                <!--end::Table row-->
-                                <!--begin::Table row-->
-                                <tr>
-                                    <!--begin::Checkbox-->
-                                    <td>
-                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                            <input class="form-check-input" type="checkbox" value="1" />
-                                        </div>
-                                    </td>
-                                    <!--end::Checkbox-->
-                                    <!--begin::User=-->
-                                    <td class="d-flex align-items-center">
-                                        <!--begin:: Avatar -->
-                                        <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html">
-                                                <div class="symbol-label fs-3 bg-light-danger text-danger">M</div>
-                                            </a>
-                                        </div>
-                                        <!--end::Avatar-->
-                                        <!--begin::User details-->
-                                        <div class="d-flex flex-column">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                class="text-gray-800 text-hover-primary mb-1">Melody Macy</a>
-                                            <span>melody@altbox.com</span>
-                                        </div>
-                                        <!--begin::User details-->
-                                    </td>
-                                    <!--end::User=-->
-                                    <!--begin::Role=-->
-                                    <td>Analyst</td>
-                                    <!--end::Role=-->
-                                    <!--begin::Last login=-->
-                                    <td>
-                                        <div class="badge badge-light fw-bolder">20 mins ago</div>
-                                    </td>
-                                    <!--end::Last login=-->
-                                    <!--begin::Two step=-->
-                                    <td>
-                                        <div class="badge badge-light-success fw-bolder">Enabled</div>
-                                    </td>
-                                    <!--end::Two step=-->
-                                    <!--begin::Joined-->
-                                    <td>21 Feb 2022, 10:30 am</td>
-                                    <!--begin::Joined-->
-                                    <!--begin::Action=-->
-                                    <td class="text-end">
-                                        <a href="#" class="btn btn-light btn-active-light-primary btn-sm"
-                                            data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                            <span class="svg-icon svg-icon-5 m-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none">
-                                                    <path
-                                                        d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-                                                        fill="currentColor" />
-                                                </svg>
-                                            </span>
-                                            <!--end::Svg Icon--></a>
-                                        <!--begin::Menu-->
-                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
-                                            data-kt-menu="true">
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                    class="menu-link px-3">Edit</a>
+
+
+                                        <!-- Modal Delete -->
+                                        <div class="modal fade" id="deleteModal{{ $member->id }}" tabindex="-1"
+                                            aria-labelledby="deleteModalLabel{{ $member->id }}" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <form action="{{ route('member.destroy', $member->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title"
+                                                                id="deleteModalLabel{{ $member->id }}">Hapus Member</h5>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Apakah Anda yakin ingin menghapus member
+                                                            <strong>{{ $member->namalengkap }}</strong>?
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Batal</button>
+                                                            <button type="submit" class="btn btn-danger">Hapus</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
                                             </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3"
-                                                    data-kt-users-table-filter="delete_row">Delete</a>
-                                            </div>
-                                            <!--end::Menu item-->
                                         </div>
-                                        <!--end::Menu-->
-                                    </td>
-                                    <!--end::Action=-->
-                                </tr>
-                                <!--end::Table row-->
-                                <!--begin::Table row-->
-                                <tr>
-                                    <!--begin::Checkbox-->
-                                    <td>
-                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                            <input class="form-check-input" type="checkbox" value="1" />
-                                        </div>
-                                    </td>
-                                    <!--end::Checkbox-->
-                                    <!--begin::User=-->
-                                    <td class="d-flex align-items-center">
-                                        <!--begin:: Avatar -->
-                                        <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html">
-                                                <div class="symbol-label">
-                                                    <img src="assets/media/avatars/300-1.jpg" alt="Max Smith"
-                                                        class="w-100" />
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <!--end::Avatar-->
-                                        <!--begin::User details-->
-                                        <div class="d-flex flex-column">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                class="text-gray-800 text-hover-primary mb-1">Max Smith</a>
-                                            <span>max@kt.com</span>
-                                        </div>
-                                        <!--begin::User details-->
-                                    </td>
-                                    <!--end::User=-->
-                                    <!--begin::Role=-->
-                                    <td>Developer</td>
-                                    <!--end::Role=-->
-                                    <!--begin::Last login=-->
-                                    <td>
-                                        <div class="badge badge-light fw-bolder">3 days ago</div>
-                                    </td>
-                                    <!--end::Last login=-->
-                                    <!--begin::Two step=-->
-                                    <td></td>
-                                    <!--end::Two step=-->
-                                    <!--begin::Joined-->
-                                    <td>24 Jun 2022, 2:40 pm</td>
-                                    <!--begin::Joined-->
-                                    <!--begin::Action=-->
-                                    <td class="text-end">
-                                        <a href="#" class="btn btn-light btn-active-light-primary btn-sm"
-                                            data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                            <span class="svg-icon svg-icon-5 m-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none">
-                                                    <path
-                                                        d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-                                                        fill="currentColor" />
-                                                </svg>
-                                            </span>
-                                            <!--end::Svg Icon--></a>
-                                        <!--begin::Menu-->
-                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
-                                            data-kt-menu="true">
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                    class="menu-link px-3">Edit</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3"
-                                                    data-kt-users-table-filter="delete_row">Delete</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                        </div>
-                                        <!--end::Menu-->
-                                    </td>
-                                    <!--end::Action=-->
-                                </tr>
-                                <!--end::Table row-->
-                                <!--begin::Table row-->
-                                <tr>
-                                    <!--begin::Checkbox-->
-                                    <td>
-                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                            <input class="form-check-input" type="checkbox" value="1" />
-                                        </div>
-                                    </td>
-                                    <!--end::Checkbox-->
-                                    <!--begin::User=-->
-                                    <td class="d-flex align-items-center">
-                                        <!--begin:: Avatar -->
-                                        <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html">
-                                                <div class="symbol-label">
-                                                    <img src="assets/media/avatars/300-5.jpg" alt="Sean Bean"
-                                                        class="w-100" />
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <!--end::Avatar-->
-                                        <!--begin::User details-->
-                                        <div class="d-flex flex-column">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                class="text-gray-800 text-hover-primary mb-1">Sean Bean</a>
-                                            <span>sean@dellito.com</span>
-                                        </div>
-                                        <!--begin::User details-->
-                                    </td>
-                                    <!--end::User=-->
-                                    <!--begin::Role=-->
-                                    <td>Support</td>
-                                    <!--end::Role=-->
-                                    <!--begin::Last login=-->
-                                    <td>
-                                        <div class="badge badge-light fw-bolder">5 hours ago</div>
-                                    </td>
-                                    <!--end::Last login=-->
-                                    <!--begin::Two step=-->
-                                    <td>
-                                        <div class="badge badge-light-success fw-bolder">Enabled</div>
-                                    </td>
-                                    <!--end::Two step=-->
-                                    <!--begin::Joined-->
-                                    <td>10 Mar 2022, 5:30 pm</td>
-                                    <!--begin::Joined-->
-                                    <!--begin::Action=-->
-                                    <td class="text-end">
-                                        <a href="#" class="btn btn-light btn-active-light-primary btn-sm"
-                                            data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                            <span class="svg-icon svg-icon-5 m-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none">
-                                                    <path
-                                                        d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-                                                        fill="currentColor" />
-                                                </svg>
-                                            </span>
-                                            <!--end::Svg Icon--></a>
-                                        <!--begin::Menu-->
-                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
-                                            data-kt-menu="true">
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                    class="menu-link px-3">Edit</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3"
-                                                    data-kt-users-table-filter="delete_row">Delete</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                        </div>
-                                        <!--end::Menu-->
-                                    </td>
-                                    <!--end::Action=-->
-                                </tr>
-                                <!--end::Table row-->
-                                <!--begin::Table row-->
-                                <tr>
-                                    <!--begin::Checkbox-->
-                                    <td>
-                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                            <input class="form-check-input" type="checkbox" value="1" />
-                                        </div>
-                                    </td>
-                                    <!--end::Checkbox-->
-                                    <!--begin::User=-->
-                                    <td class="d-flex align-items-center">
-                                        <!--begin:: Avatar -->
-                                        <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html">
-                                                <div class="symbol-label">
-                                                    <img src="assets/media/avatars/300-25.jpg" alt="Brian Cox"
-                                                        class="w-100" />
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <!--end::Avatar-->
-                                        <!--begin::User details-->
-                                        <div class="d-flex flex-column">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                class="text-gray-800 text-hover-primary mb-1">Brian Cox</a>
-                                            <span>brian@exchange.com</span>
-                                        </div>
-                                        <!--begin::User details-->
-                                    </td>
-                                    <!--end::User=-->
-                                    <!--begin::Role=-->
-                                    <td>Developer</td>
-                                    <!--end::Role=-->
-                                    <!--begin::Last login=-->
-                                    <td>
-                                        <div class="badge badge-light fw-bolder">2 days ago</div>
-                                    </td>
-                                    <!--end::Last login=-->
-                                    <!--begin::Two step=-->
-                                    <td>
-                                        <div class="badge badge-light-success fw-bolder">Enabled</div>
-                                    </td>
-                                    <!--end::Two step=-->
-                                    <!--begin::Joined-->
-                                    <td>25 Oct 2022, 11:30 am</td>
-                                    <!--begin::Joined-->
-                                    <!--begin::Action=-->
-                                    <td class="text-end">
-                                        <a href="#" class="btn btn-light btn-active-light-primary btn-sm"
-                                            data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                            <span class="svg-icon svg-icon-5 m-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none">
-                                                    <path
-                                                        d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-                                                        fill="currentColor" />
-                                                </svg>
-                                            </span>
-                                            <!--end::Svg Icon--></a>
-                                        <!--begin::Menu-->
-                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
-                                            data-kt-menu="true">
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                    class="menu-link px-3">Edit</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3"
-                                                    data-kt-users-table-filter="delete_row">Delete</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                        </div>
-                                        <!--end::Menu-->
-                                    </td>
-                                    <!--end::Action=-->
-                                </tr>
-                                <!--end::Table row-->
-                                <!--begin::Table row-->
-                                <tr>
-                                    <!--begin::Checkbox-->
-                                    <td>
-                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                            <input class="form-check-input" type="checkbox" value="1" />
-                                        </div>
-                                    </td>
-                                    <!--end::Checkbox-->
-                                    <!--begin::User=-->
-                                    <td class="d-flex align-items-center">
-                                        <!--begin:: Avatar -->
-                                        <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html">
-                                                <div class="symbol-label fs-3 bg-light-warning text-warning">C</div>
-                                            </a>
-                                        </div>
-                                        <!--end::Avatar-->
-                                        <!--begin::User details-->
-                                        <div class="d-flex flex-column">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                class="text-gray-800 text-hover-primary mb-1">Mikaela Collins</a>
-                                            <span>mik@pex.com</span>
-                                        </div>
-                                        <!--begin::User details-->
-                                    </td>
-                                    <!--end::User=-->
-                                    <!--begin::Role=-->
-                                    <td>Administrator</td>
-                                    <!--end::Role=-->
-                                    <!--begin::Last login=-->
-                                    <td>
-                                        <div class="badge badge-light fw-bolder">5 days ago</div>
-                                    </td>
-                                    <!--end::Last login=-->
-                                    <!--begin::Two step=-->
-                                    <td></td>
-                                    <!--end::Two step=-->
-                                    <!--begin::Joined-->
-                                    <td>15 Apr 2022, 9:23 pm</td>
-                                    <!--begin::Joined-->
-                                    <!--begin::Action=-->
-                                    <td class="text-end">
-                                        <a href="#" class="btn btn-light btn-active-light-primary btn-sm"
-                                            data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                            <span class="svg-icon svg-icon-5 m-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none">
-                                                    <path
-                                                        d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-                                                        fill="currentColor" />
-                                                </svg>
-                                            </span>
-                                            <!--end::Svg Icon--></a>
-                                        <!--begin::Menu-->
-                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
-                                            data-kt-menu="true">
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                    class="menu-link px-3">Edit</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3"
-                                                    data-kt-users-table-filter="delete_row">Delete</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                        </div>
-                                        <!--end::Menu-->
-                                    </td>
-                                    <!--end::Action=-->
-                                </tr>
-                                <!--end::Table row-->
-                                <!--begin::Table row-->
-                                <tr>
-                                    <!--begin::Checkbox-->
-                                    <td>
-                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                            <input class="form-check-input" type="checkbox" value="1" />
-                                        </div>
-                                    </td>
-                                    <!--end::Checkbox-->
-                                    <!--begin::User=-->
-                                    <td class="d-flex align-items-center">
-                                        <!--begin:: Avatar -->
-                                        <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html">
-                                                <div class="symbol-label">
-                                                    <img src="assets/media/avatars/300-9.jpg" alt="Francis Mitcham"
-                                                        class="w-100" />
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <!--end::Avatar-->
-                                        <!--begin::User details-->
-                                        <div class="d-flex flex-column">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                class="text-gray-800 text-hover-primary mb-1">Francis Mitcham</a>
-                                            <span>f.mit@kpmg.com</span>
-                                        </div>
-                                        <!--begin::User details-->
-                                    </td>
-                                    <!--end::User=-->
-                                    <!--begin::Role=-->
-                                    <td>Trial</td>
-                                    <!--end::Role=-->
-                                    <!--begin::Last login=-->
-                                    <td>
-                                        <div class="badge badge-light fw-bolder">3 weeks ago</div>
-                                    </td>
-                                    <!--end::Last login=-->
-                                    <!--begin::Two step=-->
-                                    <td></td>
-                                    <!--end::Two step=-->
-                                    <!--begin::Joined-->
-                                    <td>05 May 2022, 5:30 pm</td>
-                                    <!--begin::Joined-->
-                                    <!--begin::Action=-->
-                                    <td class="text-end">
-                                        <a href="#" class="btn btn-light btn-active-light-primary btn-sm"
-                                            data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                            <span class="svg-icon svg-icon-5 m-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none">
-                                                    <path
-                                                        d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-                                                        fill="currentColor" />
-                                                </svg>
-                                            </span>
-                                            <!--end::Svg Icon--></a>
-                                        <!--begin::Menu-->
-                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
-                                            data-kt-menu="true">
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                    class="menu-link px-3">Edit</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3"
-                                                    data-kt-users-table-filter="delete_row">Delete</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                        </div>
-                                        <!--end::Menu-->
-                                    </td>
-                                    <!--end::Action=-->
-                                </tr>
-                                <!--end::Table row-->
-                                <!--begin::Table row-->
-                                <tr>
-                                    <!--begin::Checkbox-->
-                                    <td>
-                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                            <input class="form-check-input" type="checkbox" value="1" />
-                                        </div>
-                                    </td>
-                                    <!--end::Checkbox-->
-                                    <!--begin::User=-->
-                                    <td class="d-flex align-items-center">
-                                        <!--begin:: Avatar -->
-                                        <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html">
-                                                <div class="symbol-label fs-3 bg-light-danger text-danger">O</div>
-                                            </a>
-                                        </div>
-                                        <!--end::Avatar-->
-                                        <!--begin::User details-->
-                                        <div class="d-flex flex-column">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                class="text-gray-800 text-hover-primary mb-1">Olivia Wild</a>
-                                            <span>olivia@corpmail.com</span>
-                                        </div>
-                                        <!--begin::User details-->
-                                    </td>
-                                    <!--end::User=-->
-                                    <!--begin::Role=-->
-                                    <td>Administrator</td>
-                                    <!--end::Role=-->
-                                    <!--begin::Last login=-->
-                                    <td>
-                                        <div class="badge badge-light fw-bolder">Yesterday</div>
-                                    </td>
-                                    <!--end::Last login=-->
-                                    <!--begin::Two step=-->
-                                    <td></td>
-                                    <!--end::Two step=-->
-                                    <!--begin::Joined-->
-                                    <td>25 Jul 2022, 11:30 am</td>
-                                    <!--begin::Joined-->
-                                    <!--begin::Action=-->
-                                    <td class="text-end">
-                                        <a href="#" class="btn btn-light btn-active-light-primary btn-sm"
-                                            data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                            <span class="svg-icon svg-icon-5 m-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none">
-                                                    <path
-                                                        d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-                                                        fill="currentColor" />
-                                                </svg>
-                                            </span>
-                                            <!--end::Svg Icon--></a>
-                                        <!--begin::Menu-->
-                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
-                                            data-kt-menu="true">
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                    class="menu-link px-3">Edit</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3"
-                                                    data-kt-users-table-filter="delete_row">Delete</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                        </div>
-                                        <!--end::Menu-->
-                                    </td>
-                                    <!--end::Action=-->
-                                </tr>
-                                <!--end::Table row-->
-                                <!--begin::Table row-->
-                                <tr>
-                                    <!--begin::Checkbox-->
-                                    <td>
-                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                            <input class="form-check-input" type="checkbox" value="1" />
-                                        </div>
-                                    </td>
-                                    <!--end::Checkbox-->
-                                    <!--begin::User=-->
-                                    <td class="d-flex align-items-center">
-                                        <!--begin:: Avatar -->
-                                        <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html">
-                                                <div class="symbol-label fs-3 bg-light-primary text-primary">N</div>
-                                            </a>
-                                        </div>
-                                        <!--end::Avatar-->
-                                        <!--begin::User details-->
-                                        <div class="d-flex flex-column">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                class="text-gray-800 text-hover-primary mb-1">Neil Owen</a>
-                                            <span>owen.neil@gmail.com</span>
-                                        </div>
-                                        <!--begin::User details-->
-                                    </td>
-                                    <!--end::User=-->
-                                    <!--begin::Role=-->
-                                    <td>Analyst</td>
-                                    <!--end::Role=-->
-                                    <!--begin::Last login=-->
-                                    <td>
-                                        <div class="badge badge-light fw-bolder">20 mins ago</div>
-                                    </td>
-                                    <!--end::Last login=-->
-                                    <!--begin::Two step=-->
-                                    <td>
-                                        <div class="badge badge-light-success fw-bolder">Enabled</div>
-                                    </td>
-                                    <!--end::Two step=-->
-                                    <!--begin::Joined-->
-                                    <td>10 Mar 2022, 11:05 am</td>
-                                    <!--begin::Joined-->
-                                    <!--begin::Action=-->
-                                    <td class="text-end">
-                                        <a href="#" class="btn btn-light btn-active-light-primary btn-sm"
-                                            data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                            <span class="svg-icon svg-icon-5 m-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none">
-                                                    <path
-                                                        d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-                                                        fill="currentColor" />
-                                                </svg>
-                                            </span>
-                                            <!--end::Svg Icon--></a>
-                                        <!--begin::Menu-->
-                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
-                                            data-kt-menu="true">
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                    class="menu-link px-3">Edit</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3"
-                                                    data-kt-users-table-filter="delete_row">Delete</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                        </div>
-                                        <!--end::Menu-->
-                                    </td>
-                                    <!--end::Action=-->
-                                </tr>
-                                <!--end::Table row-->
-                                <!--begin::Table row-->
-                                <tr>
-                                    <!--begin::Checkbox-->
-                                    <td>
-                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                            <input class="form-check-input" type="checkbox" value="1" />
-                                        </div>
-                                    </td>
-                                    <!--end::Checkbox-->
-                                    <!--begin::User=-->
-                                    <td class="d-flex align-items-center">
-                                        <!--begin:: Avatar -->
-                                        <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html">
-                                                <div class="symbol-label">
-                                                    <img src="assets/media/avatars/300-23.jpg" alt="Dan Wilson"
-                                                        class="w-100" />
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <!--end::Avatar-->
-                                        <!--begin::User details-->
-                                        <div class="d-flex flex-column">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                class="text-gray-800 text-hover-primary mb-1">Dan Wilson</a>
-                                            <span>dam@consilting.com</span>
-                                        </div>
-                                        <!--begin::User details-->
-                                    </td>
-                                    <!--end::User=-->
-                                    <!--begin::Role=-->
-                                    <td>Developer</td>
-                                    <!--end::Role=-->
-                                    <!--begin::Last login=-->
-                                    <td>
-                                        <div class="badge badge-light fw-bolder">3 days ago</div>
-                                    </td>
-                                    <!--end::Last login=-->
-                                    <!--begin::Two step=-->
-                                    <td></td>
-                                    <!--end::Two step=-->
-                                    <!--begin::Joined-->
-                                    <td>24 Jun 2022, 8:43 pm</td>
-                                    <!--begin::Joined-->
-                                    <!--begin::Action=-->
-                                    <td class="text-end">
-                                        <a href="#" class="btn btn-light btn-active-light-primary btn-sm"
-                                            data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                            <span class="svg-icon svg-icon-5 m-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none">
-                                                    <path
-                                                        d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-                                                        fill="currentColor" />
-                                                </svg>
-                                            </span>
-                                            <!--end::Svg Icon--></a>
-                                        <!--begin::Menu-->
-                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
-                                            data-kt-menu="true">
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                    class="menu-link px-3">Edit</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3"
-                                                    data-kt-users-table-filter="delete_row">Delete</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                        </div>
-                                        <!--end::Menu-->
-                                    </td>
-                                    <!--end::Action=-->
-                                </tr>
-                                <!--end::Table row-->
-                                <!--begin::Table row-->
-                                <tr>
-                                    <!--begin::Checkbox-->
-                                    <td>
-                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                            <input class="form-check-input" type="checkbox" value="1" />
-                                        </div>
-                                    </td>
-                                    <!--end::Checkbox-->
-                                    <!--begin::User=-->
-                                    <td class="d-flex align-items-center">
-                                        <!--begin:: Avatar -->
-                                        <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html">
-                                                <div class="symbol-label fs-3 bg-light-danger text-danger">E</div>
-                                            </a>
-                                        </div>
-                                        <!--end::Avatar-->
-                                        <!--begin::User details-->
-                                        <div class="d-flex flex-column">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                class="text-gray-800 text-hover-primary mb-1">Emma Bold</a>
-                                            <span>emma@intenso.com</span>
-                                        </div>
-                                        <!--begin::User details-->
-                                    </td>
-                                    <!--end::User=-->
-                                    <!--begin::Role=-->
-                                    <td>Support</td>
-                                    <!--end::Role=-->
-                                    <!--begin::Last login=-->
-                                    <td>
-                                        <div class="badge badge-light fw-bolder">5 hours ago</div>
-                                    </td>
-                                    <!--end::Last login=-->
-                                    <!--begin::Two step=-->
-                                    <td>
-                                        <div class="badge badge-light-success fw-bolder">Enabled</div>
-                                    </td>
-                                    <!--end::Two step=-->
-                                    <!--begin::Joined-->
-                                    <td>20 Dec 2022, 9:23 pm</td>
-                                    <!--begin::Joined-->
-                                    <!--begin::Action=-->
-                                    <td class="text-end">
-                                        <a href="#" class="btn btn-light btn-active-light-primary btn-sm"
-                                            data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                            <span class="svg-icon svg-icon-5 m-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none">
-                                                    <path
-                                                        d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-                                                        fill="currentColor" />
-                                                </svg>
-                                            </span>
-                                            <!--end::Svg Icon--></a>
-                                        <!--begin::Menu-->
-                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
-                                            data-kt-menu="true">
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                    class="menu-link px-3">Edit</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3"
-                                                    data-kt-users-table-filter="delete_row">Delete</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                        </div>
-                                        <!--end::Menu-->
-                                    </td>
-                                    <!--end::Action=-->
-                                </tr>
-                                <!--end::Table row-->
-                                <!--begin::Table row-->
-                                <tr>
-                                    <!--begin::Checkbox-->
-                                    <td>
-                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                            <input class="form-check-input" type="checkbox" value="1" />
-                                        </div>
-                                    </td>
-                                    <!--end::Checkbox-->
-                                    <!--begin::User=-->
-                                    <td class="d-flex align-items-center">
-                                        <!--begin:: Avatar -->
-                                        <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html">
-                                                <div class="symbol-label">
-                                                    <img src="assets/media/avatars/300-12.jpg" alt="Ana Crown"
-                                                        class="w-100" />
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <!--end::Avatar-->
-                                        <!--begin::User details-->
-                                        <div class="d-flex flex-column">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                class="text-gray-800 text-hover-primary mb-1">Ana Crown</a>
-                                            <span>ana.cf@limtel.com</span>
-                                        </div>
-                                        <!--begin::User details-->
-                                    </td>
-                                    <!--end::User=-->
-                                    <!--begin::Role=-->
-                                    <td>Developer</td>
-                                    <!--end::Role=-->
-                                    <!--begin::Last login=-->
-                                    <td>
-                                        <div class="badge badge-light fw-bolder">2 days ago</div>
-                                    </td>
-                                    <!--end::Last login=-->
-                                    <!--begin::Two step=-->
-                                    <td>
-                                        <div class="badge badge-light-success fw-bolder">Enabled</div>
-                                    </td>
-                                    <!--end::Two step=-->
-                                    <!--begin::Joined-->
-                                    <td>05 May 2022, 5:30 pm</td>
-                                    <!--begin::Joined-->
-                                    <!--begin::Action=-->
-                                    <td class="text-end">
-                                        <a href="#" class="btn btn-light btn-active-light-primary btn-sm"
-                                            data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                            <span class="svg-icon svg-icon-5 m-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none">
-                                                    <path
-                                                        d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-                                                        fill="currentColor" />
-                                                </svg>
-                                            </span>
-                                            <!--end::Svg Icon--></a>
-                                        <!--begin::Menu-->
-                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
-                                            data-kt-menu="true">
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                    class="menu-link px-3">Edit</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3"
-                                                    data-kt-users-table-filter="delete_row">Delete</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                        </div>
-                                        <!--end::Menu-->
-                                    </td>
-                                    <!--end::Action=-->
-                                </tr>
-                                <!--end::Table row-->
-                                <!--begin::Table row-->
-                                <tr>
-                                    <!--begin::Checkbox-->
-                                    <td>
-                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                            <input class="form-check-input" type="checkbox" value="1" />
-                                        </div>
-                                    </td>
-                                    <!--end::Checkbox-->
-                                    <!--begin::User=-->
-                                    <td class="d-flex align-items-center">
-                                        <!--begin:: Avatar -->
-                                        <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html">
-                                                <div class="symbol-label fs-3 bg-light-info text-info">A</div>
-                                            </a>
-                                        </div>
-                                        <!--end::Avatar-->
-                                        <!--begin::User details-->
-                                        <div class="d-flex flex-column">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                class="text-gray-800 text-hover-primary mb-1">Robert Doe</a>
-                                            <span>robert@benko.com</span>
-                                        </div>
-                                        <!--begin::User details-->
-                                    </td>
-                                    <!--end::User=-->
-                                    <!--begin::Role=-->
-                                    <td>Administrator</td>
-                                    <!--end::Role=-->
-                                    <!--begin::Last login=-->
-                                    <td>
-                                        <div class="badge badge-light fw-bolder">5 days ago</div>
-                                    </td>
-                                    <!--end::Last login=-->
-                                    <!--begin::Two step=-->
-                                    <td></td>
-                                    <!--end::Two step=-->
-                                    <!--begin::Joined-->
-                                    <td>25 Oct 2022, 10:10 pm</td>
-                                    <!--begin::Joined-->
-                                    <!--begin::Action=-->
-                                    <td class="text-end">
-                                        <a href="#" class="btn btn-light btn-active-light-primary btn-sm"
-                                            data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                            <span class="svg-icon svg-icon-5 m-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none">
-                                                    <path
-                                                        d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-                                                        fill="currentColor" />
-                                                </svg>
-                                            </span>
-                                            <!--end::Svg Icon--></a>
-                                        <!--begin::Menu-->
-                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
-                                            data-kt-menu="true">
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                    class="menu-link px-3">Edit</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3"
-                                                    data-kt-users-table-filter="delete_row">Delete</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                        </div>
-                                        <!--end::Menu-->
-                                    </td>
-                                    <!--end::Action=-->
-                                </tr>
-                                <!--end::Table row-->
-                                <!--begin::Table row-->
-                                <tr>
-                                    <!--begin::Checkbox-->
-                                    <td>
-                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                            <input class="form-check-input" type="checkbox" value="1" />
-                                        </div>
-                                    </td>
-                                    <!--end::Checkbox-->
-                                    <!--begin::User=-->
-                                    <td class="d-flex align-items-center">
-                                        <!--begin:: Avatar -->
-                                        <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html">
-                                                <div class="symbol-label">
-                                                    <img src="assets/media/avatars/300-13.jpg" alt="John Miller"
-                                                        class="w-100" />
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <!--end::Avatar-->
-                                        <!--begin::User details-->
-                                        <div class="d-flex flex-column">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                class="text-gray-800 text-hover-primary mb-1">John Miller</a>
-                                            <span>miller@mapple.com</span>
-                                        </div>
-                                        <!--begin::User details-->
-                                    </td>
-                                    <!--end::User=-->
-                                    <!--begin::Role=-->
-                                    <td>Trial</td>
-                                    <!--end::Role=-->
-                                    <!--begin::Last login=-->
-                                    <td>
-                                        <div class="badge badge-light fw-bolder">3 weeks ago</div>
-                                    </td>
-                                    <!--end::Last login=-->
-                                    <!--begin::Two step=-->
-                                    <td></td>
-                                    <!--end::Two step=-->
-                                    <!--begin::Joined-->
-                                    <td>10 Nov 2022, 8:43 pm</td>
-                                    <!--begin::Joined-->
-                                    <!--begin::Action=-->
-                                    <td class="text-end">
-                                        <a href="#" class="btn btn-light btn-active-light-primary btn-sm"
-                                            data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                            <span class="svg-icon svg-icon-5 m-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none">
-                                                    <path
-                                                        d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-                                                        fill="currentColor" />
-                                                </svg>
-                                            </span>
-                                            <!--end::Svg Icon--></a>
-                                        <!--begin::Menu-->
-                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
-                                            data-kt-menu="true">
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                    class="menu-link px-3">Edit</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3"
-                                                    data-kt-users-table-filter="delete_row">Delete</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                        </div>
-                                        <!--end::Menu-->
-                                    </td>
-                                    <!--end::Action=-->
-                                </tr>
-                                <!--end::Table row-->
-                                <!--begin::Table row-->
-                                <tr>
-                                    <!--begin::Checkbox-->
-                                    <td>
-                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                            <input class="form-check-input" type="checkbox" value="1" />
-                                        </div>
-                                    </td>
-                                    <!--end::Checkbox-->
-                                    <!--begin::User=-->
-                                    <td class="d-flex align-items-center">
-                                        <!--begin:: Avatar -->
-                                        <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html">
-                                                <div class="symbol-label fs-3 bg-light-success text-success">L</div>
-                                            </a>
-                                        </div>
-                                        <!--end::Avatar-->
-                                        <!--begin::User details-->
-                                        <div class="d-flex flex-column">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                class="text-gray-800 text-hover-primary mb-1">Lucy Kunic</a>
-                                            <span>lucy.m@fentech.com</span>
-                                        </div>
-                                        <!--begin::User details-->
-                                    </td>
-                                    <!--end::User=-->
-                                    <!--begin::Role=-->
-                                    <td>Administrator</td>
-                                    <!--end::Role=-->
-                                    <!--begin::Last login=-->
-                                    <td>
-                                        <div class="badge badge-light fw-bolder">Yesterday</div>
-                                    </td>
-                                    <!--end::Last login=-->
-                                    <!--begin::Two step=-->
-                                    <td></td>
-                                    <!--end::Two step=-->
-                                    <!--begin::Joined-->
-                                    <td>24 Jun 2022, 9:23 pm</td>
-                                    <!--begin::Joined-->
-                                    <!--begin::Action=-->
-                                    <td class="text-end">
-                                        <a href="#" class="btn btn-light btn-active-light-primary btn-sm"
-                                            data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                            <span class="svg-icon svg-icon-5 m-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none">
-                                                    <path
-                                                        d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-                                                        fill="currentColor" />
-                                                </svg>
-                                            </span>
-                                            <!--end::Svg Icon--></a>
-                                        <!--begin::Menu-->
-                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
-                                            data-kt-menu="true">
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                    class="menu-link px-3">Edit</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3"
-                                                    data-kt-users-table-filter="delete_row">Delete</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                        </div>
-                                        <!--end::Menu-->
-                                    </td>
-                                    <!--end::Action=-->
-                                </tr>
-                                <!--end::Table row-->
-                                <!--begin::Table row-->
-                                <tr>
-                                    <!--begin::Checkbox-->
-                                    <td>
-                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                            <input class="form-check-input" type="checkbox" value="1" />
-                                        </div>
-                                    </td>
-                                    <!--end::Checkbox-->
-                                    <!--begin::User=-->
-                                    <td class="d-flex align-items-center">
-                                        <!--begin:: Avatar -->
-                                        <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html">
-                                                <div class="symbol-label fs-3 bg-light-danger text-danger">M</div>
-                                            </a>
-                                        </div>
-                                        <!--end::Avatar-->
-                                        <!--begin::User details-->
-                                        <div class="d-flex flex-column">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                class="text-gray-800 text-hover-primary mb-1">Melody Macy</a>
-                                            <span>melody@altbox.com</span>
-                                        </div>
-                                        <!--begin::User details-->
-                                    </td>
-                                    <!--end::User=-->
-                                    <!--begin::Role=-->
-                                    <td>Analyst</td>
-                                    <!--end::Role=-->
-                                    <!--begin::Last login=-->
-                                    <td>
-                                        <div class="badge badge-light fw-bolder">20 mins ago</div>
-                                    </td>
-                                    <!--end::Last login=-->
-                                    <!--begin::Two step=-->
-                                    <td>
-                                        <div class="badge badge-light-success fw-bolder">Enabled</div>
-                                    </td>
-                                    <!--end::Two step=-->
-                                    <!--begin::Joined-->
-                                    <td>20 Dec 2022, 2:40 pm</td>
-                                    <!--begin::Joined-->
-                                    <!--begin::Action=-->
-                                    <td class="text-end">
-                                        <a href="#" class="btn btn-light btn-active-light-primary btn-sm"
-                                            data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                            <span class="svg-icon svg-icon-5 m-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none">
-                                                    <path
-                                                        d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-                                                        fill="currentColor" />
-                                                </svg>
-                                            </span>
-                                            <!--end::Svg Icon--></a>
-                                        <!--begin::Menu-->
-                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
-                                            data-kt-menu="true">
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                    class="menu-link px-3">Edit</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3"
-                                                    data-kt-users-table-filter="delete_row">Delete</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                        </div>
-                                        <!--end::Menu-->
-                                    </td>
-                                    <!--end::Action=-->
-                                </tr>
-                                <!--end::Table row-->
-                                <!--begin::Table row-->
-                                <tr>
-                                    <!--begin::Checkbox-->
-                                    <td>
-                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                            <input class="form-check-input" type="checkbox" value="1" />
-                                        </div>
-                                    </td>
-                                    <!--end::Checkbox-->
-                                    <!--begin::User=-->
-                                    <td class="d-flex align-items-center">
-                                        <!--begin:: Avatar -->
-                                        <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html">
-                                                <div class="symbol-label">
-                                                    <img src="assets/media/avatars/300-1.jpg" alt="Max Smith"
-                                                        class="w-100" />
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <!--end::Avatar-->
-                                        <!--begin::User details-->
-                                        <div class="d-flex flex-column">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                class="text-gray-800 text-hover-primary mb-1">Max Smith</a>
-                                            <span>max@kt.com</span>
-                                        </div>
-                                        <!--begin::User details-->
-                                    </td>
-                                    <!--end::User=-->
-                                    <!--begin::Role=-->
-                                    <td>Developer</td>
-                                    <!--end::Role=-->
-                                    <!--begin::Last login=-->
-                                    <td>
-                                        <div class="badge badge-light fw-bolder">3 days ago</div>
-                                    </td>
-                                    <!--end::Last login=-->
-                                    <!--begin::Two step=-->
-                                    <td></td>
-                                    <!--end::Two step=-->
-                                    <!--begin::Joined-->
-                                    <td>10 Nov 2022, 11:05 am</td>
-                                    <!--begin::Joined-->
-                                    <!--begin::Action=-->
-                                    <td class="text-end">
-                                        <a href="#" class="btn btn-light btn-active-light-primary btn-sm"
-                                            data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                            <span class="svg-icon svg-icon-5 m-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none">
-                                                    <path
-                                                        d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-                                                        fill="currentColor" />
-                                                </svg>
-                                            </span>
-                                            <!--end::Svg Icon--></a>
-                                        <!--begin::Menu-->
-                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
-                                            data-kt-menu="true">
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                    class="menu-link px-3">Edit</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3"
-                                                    data-kt-users-table-filter="delete_row">Delete</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                        </div>
-                                        <!--end::Menu-->
-                                    </td>
-                                    <!--end::Action=-->
-                                </tr>
-                                <!--end::Table row-->
-                                <!--begin::Table row-->
-                                <tr>
-                                    <!--begin::Checkbox-->
-                                    <td>
-                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                            <input class="form-check-input" type="checkbox" value="1" />
-                                        </div>
-                                    </td>
-                                    <!--end::Checkbox-->
-                                    <!--begin::User=-->
-                                    <td class="d-flex align-items-center">
-                                        <!--begin:: Avatar -->
-                                        <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html">
-                                                <div class="symbol-label">
-                                                    <img src="assets/media/avatars/300-5.jpg" alt="Sean Bean"
-                                                        class="w-100" />
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <!--end::Avatar-->
-                                        <!--begin::User details-->
-                                        <div class="d-flex flex-column">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                class="text-gray-800 text-hover-primary mb-1">Sean Bean</a>
-                                            <span>sean@dellito.com</span>
-                                        </div>
-                                        <!--begin::User details-->
-                                    </td>
-                                    <!--end::User=-->
-                                    <!--begin::Role=-->
-                                    <td>Support</td>
-                                    <!--end::Role=-->
-                                    <!--begin::Last login=-->
-                                    <td>
-                                        <div class="badge badge-light fw-bolder">5 hours ago</div>
-                                    </td>
-                                    <!--end::Last login=-->
-                                    <!--begin::Two step=-->
-                                    <td>
-                                        <div class="badge badge-light-success fw-bolder">Enabled</div>
-                                    </td>
-                                    <!--end::Two step=-->
-                                    <!--begin::Joined-->
-                                    <td>05 May 2022, 6:05 pm</td>
-                                    <!--begin::Joined-->
-                                    <!--begin::Action=-->
-                                    <td class="text-end">
-                                        <a href="#" class="btn btn-light btn-active-light-primary btn-sm"
-                                            data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                            <span class="svg-icon svg-icon-5 m-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none">
-                                                    <path
-                                                        d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-                                                        fill="currentColor" />
-                                                </svg>
-                                            </span>
-                                            <!--end::Svg Icon--></a>
-                                        <!--begin::Menu-->
-                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
-                                            data-kt-menu="true">
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                    class="menu-link px-3">Edit</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3"
-                                                    data-kt-users-table-filter="delete_row">Delete</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                        </div>
-                                        <!--end::Menu-->
-                                    </td>
-                                    <!--end::Action=-->
-                                </tr>
-                                <!--end::Table row-->
-                                <!--begin::Table row-->
-                                <tr>
-                                    <!--begin::Checkbox-->
-                                    <td>
-                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                            <input class="form-check-input" type="checkbox" value="1" />
-                                        </div>
-                                    </td>
-                                    <!--end::Checkbox-->
-                                    <!--begin::User=-->
-                                    <td class="d-flex align-items-center">
-                                        <!--begin:: Avatar -->
-                                        <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html">
-                                                <div class="symbol-label">
-                                                    <img src="assets/media/avatars/300-25.jpg" alt="Brian Cox"
-                                                        class="w-100" />
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <!--end::Avatar-->
-                                        <!--begin::User details-->
-                                        <div class="d-flex flex-column">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                class="text-gray-800 text-hover-primary mb-1">Brian Cox</a>
-                                            <span>brian@exchange.com</span>
-                                        </div>
-                                        <!--begin::User details-->
-                                    </td>
-                                    <!--end::User=-->
-                                    <!--begin::Role=-->
-                                    <td>Developer</td>
-                                    <!--end::Role=-->
-                                    <!--begin::Last login=-->
-                                    <td>
-                                        <div class="badge badge-light fw-bolder">2 days ago</div>
-                                    </td>
-                                    <!--end::Last login=-->
-                                    <!--begin::Two step=-->
-                                    <td>
-                                        <div class="badge badge-light-success fw-bolder">Enabled</div>
-                                    </td>
-                                    <!--end::Two step=-->
-                                    <!--begin::Joined-->
-                                    <td>20 Jun 2022, 5:30 pm</td>
-                                    <!--begin::Joined-->
-                                    <!--begin::Action=-->
-                                    <td class="text-end">
-                                        <a href="#" class="btn btn-light btn-active-light-primary btn-sm"
-                                            data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                            <span class="svg-icon svg-icon-5 m-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none">
-                                                    <path
-                                                        d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-                                                        fill="currentColor" />
-                                                </svg>
-                                            </span>
-                                            <!--end::Svg Icon--></a>
-                                        <!--begin::Menu-->
-                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
-                                            data-kt-menu="true">
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                    class="menu-link px-3">Edit</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3"
-                                                    data-kt-users-table-filter="delete_row">Delete</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                        </div>
-                                        <!--end::Menu-->
-                                    </td>
-                                    <!--end::Action=-->
-                                </tr>
-                                <!--end::Table row-->
-                                <!--begin::Table row-->
-                                <tr>
-                                    <!--begin::Checkbox-->
-                                    <td>
-                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                            <input class="form-check-input" type="checkbox" value="1" />
-                                        </div>
-                                    </td>
-                                    <!--end::Checkbox-->
-                                    <!--begin::User=-->
-                                    <td class="d-flex align-items-center">
-                                        <!--begin:: Avatar -->
-                                        <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html">
-                                                <div class="symbol-label fs-3 bg-light-warning text-warning">C</div>
-                                            </a>
-                                        </div>
-                                        <!--end::Avatar-->
-                                        <!--begin::User details-->
-                                        <div class="d-flex flex-column">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                class="text-gray-800 text-hover-primary mb-1">Mikaela Collins</a>
-                                            <span>mik@pex.com</span>
-                                        </div>
-                                        <!--begin::User details-->
-                                    </td>
-                                    <!--end::User=-->
-                                    <!--begin::Role=-->
-                                    <td>Administrator</td>
-                                    <!--end::Role=-->
-                                    <!--begin::Last login=-->
-                                    <td>
-                                        <div class="badge badge-light fw-bolder">5 days ago</div>
-                                    </td>
-                                    <!--end::Last login=-->
-                                    <!--begin::Two step=-->
-                                    <td></td>
-                                    <!--end::Two step=-->
-                                    <!--begin::Joined-->
-                                    <td>10 Nov 2022, 8:43 pm</td>
-                                    <!--begin::Joined-->
-                                    <!--begin::Action=-->
-                                    <td class="text-end">
-                                        <a href="#" class="btn btn-light btn-active-light-primary btn-sm"
-                                            data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                            <span class="svg-icon svg-icon-5 m-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none">
-                                                    <path
-                                                        d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-                                                        fill="currentColor" />
-                                                </svg>
-                                            </span>
-                                            <!--end::Svg Icon--></a>
-                                        <!--begin::Menu-->
-                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
-                                            data-kt-menu="true">
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                    class="menu-link px-3">Edit</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3"
-                                                    data-kt-users-table-filter="delete_row">Delete</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                        </div>
-                                        <!--end::Menu-->
-                                    </td>
-                                    <!--end::Action=-->
-                                </tr>
-                                <!--end::Table row-->
-                                <!--begin::Table row-->
-                                <tr>
-                                    <!--begin::Checkbox-->
-                                    <td>
-                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                            <input class="form-check-input" type="checkbox" value="1" />
-                                        </div>
-                                    </td>
-                                    <!--end::Checkbox-->
-                                    <!--begin::User=-->
-                                    <td class="d-flex align-items-center">
-                                        <!--begin:: Avatar -->
-                                        <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html">
-                                                <div class="symbol-label">
-                                                    <img src="assets/media/avatars/300-9.jpg" alt="Francis Mitcham"
-                                                        class="w-100" />
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <!--end::Avatar-->
-                                        <!--begin::User details-->
-                                        <div class="d-flex flex-column">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                class="text-gray-800 text-hover-primary mb-1">Francis Mitcham</a>
-                                            <span>f.mit@kpmg.com</span>
-                                        </div>
-                                        <!--begin::User details-->
-                                    </td>
-                                    <!--end::User=-->
-                                    <!--begin::Role=-->
-                                    <td>Trial</td>
-                                    <!--end::Role=-->
-                                    <!--begin::Last login=-->
-                                    <td>
-                                        <div class="badge badge-light fw-bolder">3 weeks ago</div>
-                                    </td>
-                                    <!--end::Last login=-->
-                                    <!--begin::Two step=-->
-                                    <td></td>
-                                    <!--end::Two step=-->
-                                    <!--begin::Joined-->
-                                    <td>20 Dec 2022, 5:30 pm</td>
-                                    <!--begin::Joined-->
-                                    <!--begin::Action=-->
-                                    <td class="text-end">
-                                        <a href="#" class="btn btn-light btn-active-light-primary btn-sm"
-                                            data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                            <span class="svg-icon svg-icon-5 m-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none">
-                                                    <path
-                                                        d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-                                                        fill="currentColor" />
-                                                </svg>
-                                            </span>
-                                            <!--end::Svg Icon--></a>
-                                        <!--begin::Menu-->
-                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
-                                            data-kt-menu="true">
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="../../demo1/dist/apps/user-management/users/view.html"
-                                                    class="menu-link px-3">Edit</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3"
-                                                    data-kt-users-table-filter="delete_row">Delete</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                        </div>
-                                        <!--end::Menu-->
-                                    </td>
-                                    <!--end::Action=-->
-                                </tr>
-                                <!--end::Table row-->
-                            </tbody>
-                            <!--end::Table body-->
-                        </table>
-                        <!--end::Table-->
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
                     <!--end::Card body-->
                 </div>
@@ -1745,4 +272,35 @@
         <!--end::Post-->
     </div>
     <!--end::Content-->
+@endsection
+@section('script')
+    <!-- JS -->
+    {{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> --}}
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+    {{-- <script src="{{ asset('assets/js/scripts.bundle.js') }}"></script> --}}
+
+    <script>
+        $(document).ready(function() {
+            // Swal.fire('Hello!')
+            flatpickr('.tanggal', {
+                dateFormat: 'd-m-Y'
+            });
+            $('#kt_table_users').DataTable({
+                responsive: true,
+                language: {
+                    search: "Cari:",
+                    lengthMenu: "Tampilkan _MENU_ data",
+                    info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+                    paginate: {
+                        previous: "Sebelumnya",
+                        next: "Berikutnya"
+                    },
+                    zeroRecords: "Tidak ada data ditemukan"
+                }
+            });
+        });
+    </script>
+
+    {{-- <script src="assets/js/custom/apps/customers/add.js"></script> --}}
 @endsection
