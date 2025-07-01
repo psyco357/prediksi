@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('persembahan', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('member_id');
-            $table->string('nama'); // nama pemberi (boleh redundant jika bukan member)
+            // $table->unsignedBigInteger('member_id');
+            $table->string('namalengkap'); // nama pemberi (boleh redundant jika bukan member)
+            $table->string('namabaptis'); // nama pemberi (boleh redundant jika bukan member)
             $table->decimal('nominal', 15, 2);
             $table->unsignedBigInteger('jenis_persembahan_id');
             $table->string('bukti_bayar')->nullable(); // path bukti bayar
@@ -22,8 +23,8 @@ return new class extends Migration
             $table->timestamps();
 
             // Foreign Keys
-            $table->foreign('member_id')->references('id')->on('members')->onDelete('cascade');
-            $table->foreign('jenis_persembahan_id')->references('id')->on('jenis_persembahans')->onDelete('cascade');
+            // $table->foreign('member_id')->references('id')->on('member')->onDelete('cascade');
+            $table->foreign('jenis_persembahan_id')->references('id')->on('jenispersembahan')->onDelete('cascade');
         });
     }
 

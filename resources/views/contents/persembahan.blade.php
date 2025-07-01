@@ -1,6 +1,33 @@
 @extends('layouts.app')
 @section('contents')
     @include('header.navigations')
+
+    @if (session('success'))
+        <script>
+            window.addEventListener('DOMContentLoaded', () => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: '{{ session('success') }}',
+                    timer: 3000,
+                    showConfirmButton: false
+                });
+            });
+        </script>
+    @endif
+    @if (session('error'))
+        <script>
+            window.addEventListener('DOMContentLoaded', () => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal',
+                    text: '{{ session('error') }}',
+                    timer: 4000,
+                    showConfirmButton: true
+                });
+            });
+        </script>
+    @endif
     <!--begin::Container-->
     <div class="container" style="margin-top:50px">
         <!--begin::Heading-->
@@ -104,7 +131,9 @@
         <!--begin::Product slider-->
         <div class="tns tns-default">
             <!--begin::Form-->
-            <form class="form" action="{{ route('member.store') }}" id="kt_modal_add_customer_form">
+            <form class="form" action="{{ route('persembahan.store') }}" id="formpersembahan"
+                enctype="multipart/form-data" method="POST">
+                @csrf
                 <!--begin::Modal header-->
                 <div class="text-center mb-10 mb-md-0">
                     <!--begin::Modal title-->
@@ -140,68 +169,73 @@
 
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
-                            <label class="required fs-6 fw-bold mb-2" for="jekel">Jenis Kelamin</label>
+                            <label class="required fs-6 fw-bold mb-2" for="jenis_persembahan_id">Jenis Persembahan</label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <select class="form-select form-select-solid" name="jekel" id="jekel">
-                                <option value="">-- Pilih Jenis Kelmain --</option>
-                                <option value="L">Laki-Laki</option>
-                                <option value="P">Perempuan</option>
+                            <select class="form-select form-select-solid" name="jenis_persembahan_id"
+                                id="jenis_persembahan_id">
+                                <option value="">-- Pilih Jenis Pesembahan --</option>
+                                @foreach ($jenisPersembahan as $jenis)
+                                    <option value="{{ $jenis->id }}">{{ $jenis->nama_jenis }}</option>
+                                @endforeach
                             </select>
                             <!--end::Input-->
                         </div>
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
-                            <label class="required fs-6 fw-bold mb-2" for="tempatlahir">Tempat Lahir</label>
+                            <label class="required fs-6 fw-bold mb-2" for="nominal">Nominal</label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input type="text" class="form-control form-control-solid" placeholder="Tempat Lahir"
-                                name="tempatlahir" id="tempatlahir" />
+                            <input type="text" class="form-control form-control-solid" placeholder="Nominal Persembahan"
+                                name="nominal" id="nominal" />
                             <!--end::Input-->
                         </div>
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
-                            <label class="required fs-6 fw-bold mb-2" for="tgllahir">Tanggal Lahir</label>
+                            <label class="required fs-6 fw-bold mb-2" for="bukti_bayar">Bukti Bayar</label><br />
                             <!--end::Label-->
-                            <!--begin::Input-->
-                            <input type="text" class="form-control form-control-solid tanggal"
-                                placeholder="Tanggal Lahir" name="tgllahir" id="tgllahir" />
-                            <!--end::Input-->
-                        </div>
-                        <div class="fv-row mb-7">
-                            <!--begin::Label-->
-                            <label class="required fs-6 fw-bold mb-2" for="notelp">Nomor Hp</label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <input type="text" class="form-control form-control-solid" placeholder="Nomor Hp"
-                                name="notelp" id="notelp" />
-                            <!--end::Input-->
-                        </div>
-                        <!--end::Input group-->
-                        <!--begin::Input group-->
-                        <div class="fv-row mb-7">
-                            <!--begin::Label-->
-                            <label class="fs-6 fw-bold mb-2" for="email">
-                                <span class="required">Email</span>
-                                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"
-                                    title="Email address must be active"></i>
-                            </label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <input type="email" class="form-control form-control-solid" placeholder="example@gami.com"
-                                name="email" id="email" />
-                            <!--end::Input-->
-                        </div>
-                        <!--end::Input group-->
-                        <!--begin::Input group-->
-                        <div class="fv-row mb-15">
-                            <!--begin::Label-->
-                            <label class="fs-6 fw-bold mb-2" for="alamat">Alamat</label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <input type="text" class="form-control form-control-solid"
-                                placeholder="Jl. Soekarno Blok C no.78 rt2/3" name="alamat" id="alamat" />
-                            <!--end::Input-->
+                            <!--begin::Image input-->
+                            <div class="image-input image-input-empty" data-kt-image-input="true"
+                                style="background-image: url(/assets/media/svg/avatars/blank.svg)">
+                                <!--begin::Image preview wrapper-->
+                                <div class="image-input-wrapper w-125px h-125px"></div>
+                                <!--end::Image preview wrapper-->
+
+                                <!--begin::Edit button-->
+                                <label
+                                    class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
+                                    data-kt-image-input-action="change" data-bs-toggle="tooltip" data-bs-dismiss="click"
+                                    title="Change avatar">
+                                    <i class="bi bi-pencil-fill fs-7"></i>
+
+                                    <!--begin::Inputs-->
+                                    <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+                                    <input type="hidden" name="avatar_remove" />
+                                    <!--end::Inputs-->
+                                </label>
+                                <!--end::Edit button-->
+
+                                <!--begin::Cancel button-->
+                                <span
+                                    class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
+                                    data-kt-image-input-action="cancel" data-bs-toggle="tooltip" data-bs-dismiss="click"
+                                    title="Cancel avatar">
+                                    <i class="bi bi-x fs-2"></i>
+                                </span>
+                                <!--end::Cancel button-->
+
+                                <!--begin::Remove button-->
+                                <span
+                                    class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
+                                    data-kt-image-input-action="remove" data-bs-toggle="tooltip" data-bs-dismiss="click"
+                                    title="Remove avatar">
+                                    <i class="bi bi-x fs-2"></i>
+                                </span>
+                                <!--end::Remove button-->
+                            </div>
+                            <!--end::Image input-->
+
+
                         </div>
                         <!--end::Input group-->
 
@@ -229,4 +263,22 @@
         <!--end::Product slider-->
     </div>
     <!--end::Container-->
+
+    <script>
+        const inputNominal = document.getElementById('nominal');
+
+        inputNominal.addEventListener('input', function(e) {
+            // Hapus semua karakter non-angka
+            let value = e.target.value.replace(/[^0-9]/g, '');
+
+            // Format ke Rupiah
+            value = new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(value);
+
+            e.target.value = value;
+        });
+    </script>
 @endsection

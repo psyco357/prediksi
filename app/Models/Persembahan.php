@@ -7,6 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Persembahan extends Model
 {
     protected $table = 'persembahan';
+    protected $fillable = [
+        'namalengkap',
+        'namabaptis',
+        'nominal',
+        'jenis_persembahan_id',
+        'bukti_bayar',
+        'status'
+    ];
     //
     public function member()
     {

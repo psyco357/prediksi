@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\MenuControl;
 use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\MemberControl;
+use App\Http\Controllers\PersembahanControl;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -26,9 +27,15 @@ Route::get('/login', function () {
     return view('contents.login');
 });
 //admin
-Route::get('/admin/admin', function () {
-    return view('admin.contents.member');
-});
+// Route::get('/admin/admin', function () {
+//     return view('admin.contents.member');
+// });
+//landingPage
+Route::get('/persembahan', [PersembahanControl::class, 'Persembahan']);
+Route::get('admin/persembahan', [PersembahanControl::class, 'Persembahans']);
+Route::post('/persembahan/add', [PersembahanControl::class, 'store'])->name('persembahan.store');
+// Route::put('/admin/persembahan/{id}', [PersembahanControl::class, 'update'])->name('persembahan.update');
+Route::patch('/admin/persembahan/{id}', [PersembahanControl::class, 'updateStatus'])->name('persembahan.status');
 
 
 //member
