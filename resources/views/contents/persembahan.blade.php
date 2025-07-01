@@ -46,26 +46,30 @@
         <!--begin::Row-->
         <div class="row w-100 gy-10 mb-md-20">
             <!--begin::Col-->
-            <div class="col-md-4 px-5">
+            <div class="col-md-6 px-5">
                 <!--begin::Story-->
                 <div class="text-center mb-10 mb-md-0">
                     <!--begin::Illustration-->
-                    <img src="assets/media/illustrations/sketchy-1/2.png" class="mh-125px mb-9" alt="" />
+                    {{-- <img src="assets/media/illustrations/sketchy-1/2.png" class="mh-125px mb-9" alt="" /> --}}
+                    <div>
+                        {{-- Memberi adalah wujud kasih, iman, dan ucapan syukur kita kepada Tuhan. --}}
+
+                    </div>
                     <!--end::Illustration-->
                     <!--begin::Heading-->
                     <div class="d-flex flex-center mb-5">
                         <!--begin::Badge-->
-                        <span class="badge badge-circle badge-light-success fw-bolder p-5 me-3 fs-3">1</span>
+                        {{-- <span class="badge badge-circle badge-light-success fw-bolder p-5 me-3 fs-3">1</span> --}}
                         <!--end::Badge-->
                         <!--begin::Title-->
-                        <div class="fs-5 fs-lg-3 fw-bolder text-dark">Jane Miller</div>
+                        <div class="fs-5 fs-lg-3 fw-bolder text-dark">Korintus 9:7:</div>
                         <!--end::Title-->
                     </div>
                     <!--end::Heading-->
                     <!--begin::Description-->
-                    <div class="fw-bold fs-6 fs-lg-4 text-muted">Save thousands to millions of bucks
-                        <br />by using single tool for different
-                        <br />amazing and great
+                    <div class="fw-bold fs-6 fs-lg-4 text-muted"> “Hendaklah masing-masing memberikan menurut kerelaan
+                        hatinya... sebab Allah mengasihi orang yang
+                        memberi dengan sukacita.”
                     </div>
                     <!--end::Description-->
                 </div>
@@ -73,34 +77,36 @@
             </div>
             <!--end::Col-->
             <!--begin::Col-->
-            <div class="col-md-4 px-5">
+            <div class="col-md-6 px-5">
                 <!--begin::Story-->
-                <div class="text-center mb-10 mb-md-0">
-                    <!--begin::Illustration-->
-                    <img src="assets/media/illustrations/sketchy-1/8.png" class="mh-125px mb-9" alt="" />
-                    <!--end::Illustration-->
-                    <!--begin::Heading-->
+                <div class="mb-10 mb-md-0">
                     <div class="d-flex flex-center mb-5">
-                        <!--begin::Badge-->
-                        <span class="badge badge-circle badge-light-success fw-bolder p-5 me-3 fs-3">2</span>
-                        <!--end::Badge-->
-                        <!--begin::Title-->
-                        <div class="fs-5 fs-lg-3 fw-bolder text-dark">Setup Your App</div>
-                        <!--end::Title-->
+                        <div class="fs-5 fs-lg-3 fw-bolder text-dark">Transfer Bank:</div>
                     </div>
-                    <!--end::Heading-->
-                    <!--begin::Description-->
-                    <div class="fw-bold fs-6 fs-lg-4 text-muted">Save thousands to millions of bucks
-                        <br />by using single tool for different
-                        <br />amazing and great
+
+                    <div class="fw-bold fs-6 fs-lg-4 text-muted">
+                        <p>
+                            <strong class="text-primary">Bank BCA</strong><br>
+                            No. Rek: <span id="bcaRek">123-456-7890</span>
+                            <button class="btn btn-sm btn-outline-primary ms-2"
+                                onclick="copyText('bcaRek')">Copy</button><br>
+                            A.n: GEREJA ABC
+                        </p>
+
+                        <p>
+                            <strong class="text-primary">Bank Mandiri</strong><br>
+                            No. Rek: <span id="mandiriRek">987-654-3210</span>
+                            <button class="btn btn-sm btn-outline-primary ms-2"
+                                onclick="copyText('mandiriRek')">Copy</button><br>
+                            A.n: GEREJA ABC
+                        </p>
                     </div>
-                    <!--end::Description-->
                 </div>
                 <!--end::Story-->
             </div>
             <!--end::Col-->
             <!--begin::Col-->
-            <div class="col-md-4 px-5">
+            {{-- <div class="col-md-4 px-5">
                 <!--begin::Story-->
                 <div class="text-center mb-10 mb-md-0">
                     <!--begin::Illustration-->
@@ -124,7 +130,7 @@
                     <!--end::Description-->
                 </div>
                 <!--end::Story-->
-            </div>
+            </div> --}}
             <!--end::Col-->
         </div>
         <!--end::Row-->
@@ -265,6 +271,14 @@
     <!--end::Container-->
 
     <script>
+        function copyText(id) {
+            const text = document.getElementById(id).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Nomor rekening berhasil disalin!");
+            }).catch(err => {
+                alert("Gagal menyalin: " + err);
+            });
+        }
         const inputNominal = document.getElementById('nominal');
 
         inputNominal.addEventListener('input', function(e) {
