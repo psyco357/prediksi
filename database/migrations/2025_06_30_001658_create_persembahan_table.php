@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             // $table->unsignedBigInteger('member_id');
             $table->string('namalengkap'); // nama pemberi (boleh redundant jika bukan member)
-            $table->string('namabaptis'); // nama pemberi (boleh redundant jika bukan member)
+            $table->string('namabaptis')->nullable();
             $table->decimal('nominal', 15, 2);
             $table->unsignedBigInteger('jenis_persembahan_id');
             $table->string('bukti_bayar')->nullable(); // path bukti bayar

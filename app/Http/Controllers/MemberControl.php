@@ -14,7 +14,7 @@ class MemberControl extends Controller
         try {
             $validated = $request->validate([
                 'namalengkap'   => 'required|string|max:255',
-                'namabaptis'    => 'required|string|max:255',
+                'namabaptis'    => 'nullable|string|max:255',
                 'jekel'         => 'required|in:L,P',
                 'tempatlahir'   => 'required|string|max:255',
                 'tgllahir'      => 'required|date',

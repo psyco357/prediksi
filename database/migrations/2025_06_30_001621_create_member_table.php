@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('member', function (Blueprint $table) {
             $table->id();
             $table->string('namalengkap');
-            $table->string('namabaptis');
+            $table->string('namabaptis')->nullable();
             $table->string('notelp')->nullable();
             $table->string('email')->unique()->nullable();
             $table->enum('jekel', ['L', 'P']); // Laki-laki / Perempuan

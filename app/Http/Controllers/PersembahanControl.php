@@ -32,7 +32,7 @@ class PersembahanControl extends Controller
                 'namabaptis' => 'nullable|string|max:255',
                 'jenis_persembahan_id' => 'required|exists:jenispersembahan,id',
                 'nominal' => 'required|string',
-                'avatar' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
+                'avatar' => 'nullable|image',
             ]);
 
             // Bersihkan nominal (contoh: dari "Rp100.000" jadi "100000")

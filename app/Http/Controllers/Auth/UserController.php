@@ -16,23 +16,29 @@ class UserController extends Controller
 {
     public function formLogin()
     {
-        return view('auth.login');
+        return view('contents.login');
     }
     public function auth(Request $request)
     {
-        // $credentials = $request->validate([
-        //     'username' => ['required'],
-        //     'password' => ['required']
-        // ]);
-        // if (Auth::attempt($credentials)) {
-        //     $request->session()->regenerate();
-        //     Auth::user();
-        return redirect()->intended('/dashboard');
-        // }
+        $credentials = $request->validate([
+            'username' => ['required'],
+            'password' => ['required'],
+        ]);
 
-        // return back()->withErrors([
-        //     'email' => 'Email atau password salah.',
-        // ]);
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Login berhasil',
+                'redirect' => url('/admin/member'),
+            ]);
+        }
+
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Username atau password salah.',
+        ], 401);
     }
     public function logout(Request $request)
     {
@@ -60,10 +66,10 @@ class UserController extends Controller
     //
     public function profil()
     {
-        $user = UserModel::with('anggota')->find(Auth::id());
+        // $user = UserModel::with('anggota')->find(Auth::id());
         // dd($user);
         // $anggota = AnggotaModel::where('id', $user->idanggota)->first();
-        return view('konten.profil', compact(['user', 'anggota']));
+        return view('admin.contents.profil');
     }
     public function updateProfil(Request $request)
     {

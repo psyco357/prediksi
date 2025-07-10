@@ -163,7 +163,7 @@
                                 name="namalengkap" id="namalengkap" />
                             <!--end::Input-->
                         </div>
-                        <div class="fv-row mb-7">
+                        {{-- <div class="fv-row mb-7">
                             <!--begin::Label-->
                             <label class="required fs-6 fw-bold mb-2" for="namabaptis">Nama Baptis</label>
                             <!--end::Label-->
@@ -171,7 +171,7 @@
                             <input type="text" class="form-control form-control-solid" placeholder="Nama Baptis"
                                 name="namabaptis" id="namabaptis" />
                             <!--end::Input-->
-                        </div>
+                        </div> --}}
 
                         <div class="fv-row mb-7">
                             <!--begin::Label-->

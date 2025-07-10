@@ -23,14 +23,6 @@ var KTModalCustomersAdd = (function () {
                                 },
                             },
                         },
-                        namabaptis: {
-                            validators: {
-                                notEmpty: {
-                                    message: "Nama Baptis name is required",
-                                },
-                            },
-                        },
-
                         email: {
                             validators: {
                                 notEmpty: {

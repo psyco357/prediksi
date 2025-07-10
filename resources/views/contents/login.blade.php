@@ -83,7 +83,8 @@ License: For each use you must have a valid license purchased only from above li
                     <div class="w-lg-500px p-10 p-lg-15 mx-auto">
                         <!--begin::Form-->
                         <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form"
-                            data-kt-redirect-url="/admin/member" action="#">
+                            action="{{ url('/auth') }}" method="POST">
+                            @csrf
                             <!--begin::Heading-->
                             <div class="text-center mb-10">
                                 <!--begin::Title-->
@@ -99,11 +100,11 @@ License: For each use you must have a valid license purchased only from above li
                             <!--begin::Input group-->
                             <div class="fv-row mb-10">
                                 <!--begin::Label-->
-                                <label class="form-label fs-6 fw-bolder text-dark">Email</label>
+                                <label class="form-label fs-6 fw-bolder text-dark">Username</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <input class="form-control form-control-lg form-control-solid" type="text"
-                                    name="email" autocomplete="off" />
+                                    name="username" autocomplete="off" />
                                 <!--end::Input-->
                             </div>
                             <!--end::Input group-->
